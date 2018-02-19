@@ -30,7 +30,6 @@ encoder.compile(optimizer='adadelta', loss='categorical_crossentropy', metrics=[
 encoder.fit(train_data, train_class,
                     epochs=50,
                     batch_size=128,
-                    shuffle=True,
                     validation_split=20.0)
 
 encoded_imgs = encoder.predict(test_data)
