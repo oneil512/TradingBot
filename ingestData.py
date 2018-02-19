@@ -19,7 +19,6 @@ def getPriceByDay():
         
 def shapeData(higher, lower):
     data = zip(higher, lower)
-    random.shuffle(data)
 
     train_data = []
     train_class = []
