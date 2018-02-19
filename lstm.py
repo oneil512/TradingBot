@@ -6,30 +6,13 @@ import random
 import numpy as np
 from keras.utils.np_utils import to_categorical
 
-
+# Get Data
 (price, vol, weightedprice) = getPriceAndVolumeByTime()
 (higher, lower) = partitionData(8, weightedprice, vol)
-
-data = zip(higher, lower)
-
-train_data = []
-train_class = []
-
-for record in data:
-    F, T = record
-    F_data, F_class = F
-    T_data, T_class = T
-
-    train_data.append(F_data)
-    train_data.append(T_data)
-    train_class.append([F_class])
-    train_class.append([T_class])
-
-train_class = to_categorical(train_class)
+(train_data, train_class) = shapeData(higher, lower)
 
 
-
-#work in progess
+# Create Net, work in progess
 
 model = Sequential()
 model.add(Embedding(vocabulary, hidden_size, input_length=num_steps))
@@ -43,6 +26,7 @@ encoder = Model(input_img, encoded)
 
 encoder.compile(optimizer='adadelta', loss='categorical_crossentropy', metrics=['accuracy'])
 
+# Train Net
 encoder.fit(train_data, train_class,
                     epochs=50,
                     batch_size=128,
