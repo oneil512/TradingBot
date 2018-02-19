@@ -49,15 +49,6 @@ print train_data.shape
 print train_class.shape
 
 
-#input_img = Input(shape=(28,28,1))
-
-#x = Conv2D(16, (3, 3), activation='relu', padding='same')(input_img)
-#x = MaxPooling2D((2,2), padding='same')(x)
-#x = Conv2D(8, (3,3), activation='relu', padding='same')(x)
-#x = MaxPooling2D((2,2), padding='same')(x)
-#x = Conv2D(8, (3,3), activation='relu', padding='same')(x)
-#encoded = MaxPooling2D((2,2), padding='same')(x)
-
 input_img = Input(shape=(16,))
 
 encoded = Dense(12, activation='relu')(input_img)
@@ -66,9 +57,6 @@ encoded = Dense(2, activation='sigmoid')(encoded)
 
 encoder = Model(input_img, encoded)
 
-#encoded_input = Input(shape=(encoding_dim,))
-#decoder_layer = autoencoder.layers[-1]
-#decoder = Model(encoded_input, decoder_layer(encoded_input))
 
 encoder.compile(optimizer='adadelta', loss='categorical_crossentropy', metrics=['accuracy'])
 
