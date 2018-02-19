@@ -7,32 +7,12 @@ import random
 import numpy as np
 from keras.utils.np_utils import to_categorical
 
-
+# Get Data
 (price, vol, weightedprice) = getPriceAndVolumeByTime()
 (higher, lower) = partitionData(8, weightedprice, vol)
+(train_data, train_class) = shapeData(higher, lower)
 
-data = zip(higher, lower)
-random.shuffle(data)
-
-train_data = []
-train_class = []
-
-for record in data:
-    F, T = record
-    F_data, F_class = F
-    T_data, T_class = T
-
-    train_data.append(F_data)
-    train_data.append(T_data)
-    train_class.append([F_class])
-    train_class.append([T_class])
-
-train_class = to_categorical(train_class)
-
-print train_data.shape
-print train_class.shape
-
-
+# Create Net
 input_img = Input(shape=(16,))
 
 encoded = Dense(12, activation='relu')(input_img)
@@ -44,6 +24,8 @@ encoder = Model(input_img, encoded)
 
 encoder.compile(optimizer='adadelta', loss='categorical_crossentropy', metrics=['accuracy'])
 
+
+# Train Net
 encoder.fit(train_data, train_class,
                     epochs=50,
                     batch_size=128,
