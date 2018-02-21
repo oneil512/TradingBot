@@ -1,7 +1,6 @@
 import urllib2
-import numpy as np
 import json
-from xml.dom.minidom import parse, parseString
+from keras.utils.np_utils import to_categorical
 
 
 def getPriceByDay():
@@ -35,9 +34,6 @@ def shapeData(higher, lower):
 
     train_class = to_categorical(train_class)
 
-    print train_data.shape
-    print train_class.shape
-    
     return (train_data, train_class)
 
 
