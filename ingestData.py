@@ -16,6 +16,29 @@ def getPriceByDay():
     for instance in data['values']:
         price = instance['y']
         dataFile.write(str(price) + ",")
+        
+def shapeData(higher, lower):
+    data = zip(higher, lower)
+
+    train_data = []
+    train_class = []
+
+    for record in data:
+        F, T = record
+        F_data, F_class = F
+        T_data, T_class = T
+
+        train_data.append(F_data)
+        train_data.append(T_data)
+        train_class.append([F_class])
+        train_class.append([T_class])
+
+    train_class = to_categorical(train_class)
+
+    print train_data.shape
+    print train_class.shape
+    
+    return (train_data, train_class)
 
 
 def getPriceAndVolumeByTime():
