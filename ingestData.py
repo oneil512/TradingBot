@@ -23,7 +23,7 @@ def getPriceAndVolumeByTime():
     volume = []
     weightedPrice = []
 
-    with open("priceandvolume.txt","r") as f:
+    with open("/Users/clay/TradingBot/hourlydata.txt","r") as f:
         for line in f:
             parsedData = line.split()
 

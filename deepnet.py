@@ -9,7 +9,7 @@ from keras.utils.np_utils import to_categorical
 
 
 (price, vol, weightedprice) = getPriceAndVolumeByTime()
-(higher, lower) = partitionData(8, weightedprice, vol)
+(higher, lower) = partitionData(8, price, vol)
 
 data = zip(higher, lower)
 random.shuffle(data)
